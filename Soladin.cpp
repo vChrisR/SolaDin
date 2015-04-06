@@ -2,6 +2,9 @@
   Soladin.cpp - Library for comunicating to a Soladin 600.
   Created by  teding,  November , 2011.
   Released into the public domain.
+
+  Modified by Christiaan Roeleveld, April 2015. To make it compatible with Arduino for ESP8266
+
 */
 
 
@@ -17,7 +20,7 @@
 
 
 
-void Soladin::begin(SoftwareSerial *theSerial){
+void Soladin::begin(Stream *theSerial){
      _serial = theSerial;
 }
 // set TxBuf to 0, because not all bytes will be write conCat()

@@ -2,6 +2,8 @@
   Soladin.h  - Library for comunicating to a Soladin 600.
   Created by   Teding,  November , 2011.
   Released into the public domain.
+
+  Modified by Christiaan Roeleveld, April 2015. To make it compatible with Arduino for ESP8266
 */
 
 #ifndef Soladin_h
@@ -22,17 +24,17 @@
 // action
 #define Ac_zmp 0x01
 
-#define TimeOut 100  // 100 ms
-#define dly 50   // 50 ms  give me time to push some buttons
+#define TimeOut 200 
+#define dly 100  
 
 //#include "Arduino.h"
-#include <SoftwareSerial.h>
+#include <Stream.h>
 
 
 class Soladin
 {
   public:
-    void begin(SoftwareSerial *theSerial);
+    void begin(Stream *theSerial);
     Soladin();       // constructer     
     bool query(uint8_t Cmdo);
     bool query(uint8_t Cmdo,uint8_t _day);  // overload
@@ -62,7 +64,7 @@ class Soladin
   
     
   private:
-    SoftwareSerial *_serial;
+    Stream *_serial;
     void conCat(uint8_t _cmd, uint8_t _act, char *OutBuf);
     void sndBuf(int size, char *OutBuf);
 	bool txRx(uint8_t Cmdo);
