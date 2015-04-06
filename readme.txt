@@ -1,12 +1,12 @@
 ﻿This is a libary for arduino connecting to a Soladin 600 inverter
 Soladin 600 en Windmaster 500 inverters from mastervolt are basicly the same
 Connecting to windmaster is not tested.
-The libary uses the softserial libary to make a connection to the Soladin, leaving the
-hardware serial for programming and monitoring.
-Libary made and tested on version 1.0 and 0.22
 
+This library is a modified version of the original by git use teding.
+SoftwareSerial is replaced by the stream class so physical serial port can be used. 
+Also the serial wait state and timeouts were modified.
 
-
+This lib was tested with Arduino 1.6.1 for ESP8266.
 
 Hardware connection:
 
@@ -14,7 +14,7 @@ Hardware connection:
 
 
       RJ 12 Connector	        1 nu              socket(soladin)
-      6  5  4  3  2  1	        2 TX -            1  2  3  4  5  6
+      1  2  3  4  5  6	        2 TX -            6  5  4  3  2  1
    ____________________	        3 TX +         ____________________
    | || || || || || || |        4 RX +	       | || || || || || || |
    | || || || || || || |        5 RX -         |                   |
@@ -25,16 +25,16 @@ Hardware connection:
 
 
 		   
-         ARDUINO          ____     RJ 12 connector       
-   + 5v      -----------[____]--------- 3  (TX+)             
-                          220R                               
-    (soft)TX -------------------------- 2  (TX-)	
+         ESP8266          ____     RJ 12 connector       
+   + 3.3v      -----------[____]--------- 3  (TX+)             
+                          150R                               
+    (soft)TX ---------------------------- 2  (TX-)	
                          ____
-    + 5V     ----------[____]-----†---- 4  (RX+)	
+    + 3.3V     ----------[____]-----†---- 4  (RX+)	
                           10K      |
     (soft)RX ---------------------†
 
-     gnd     -------------------------- 3  (RX-)	
+     gnd     ---------------------------- 3  (RX-)	
    
 
 
@@ -145,8 +145,3 @@ RX: 00 00 11 00 9A 54 05 04
 
 0x05: 0x54: Daily opertion time * 5 min = 420 minutes
 0x06: 0x0005: Grid output * 100 = 0.05 kWh
-
-
-
-
-
